@@ -9,6 +9,9 @@ function mergeSortedArrays (t1, t2) {
 
         //finding the next element in t1 if there exists, otherwise Infinity
         if (cursor1 < t1.length) {
+            if (elem1 > t1[cursor1]) {
+                throw "Assertion failed: Not Sorted";
+            }
             var elem1 = t1[cursor1];
         } else {
             var elem1 = Infinity;
@@ -16,6 +19,9 @@ function mergeSortedArrays (t1, t2) {
 
         //finding the next element in t2 if there exists, otherwise Infinity
         if (cursor2 < t2.length) {
+            if (elem2 > t2[cursor2]) {
+                throw "Assertion failed: Not Sorted";
+            }
             var elem2 = t2[cursor2];
         } else {
             var elem2 = Infinity;

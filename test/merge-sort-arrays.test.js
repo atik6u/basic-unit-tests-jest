@@ -29,6 +29,9 @@ test('merges [] and [] to []', () => {
 })
 
 // TODO: Should throw an exception (unsorted array)
-// test('merges unsorted [5, 1, 3] and [4, 2] to [1, 2, 3, 4, 5]', () => {
-//     expect(mergeSortedArrays([5, 1, 3], [4, 2])).toStrictEqual([4, 2, 5, 1, 3]);
-// })
+test('tries to merge unsorted [5, 1, 3] and [4, 2] and gets an exception', () => {
+    const t = () => {
+        mergeSortedArrays([5, 1, 3], [4, 2]);
+    };
+    expect(t).toThrow();
+})
