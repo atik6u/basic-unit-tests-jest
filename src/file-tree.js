@@ -14,7 +14,8 @@ function createTree (elements) {
 
 function getAbsolutePath (tree, id) {
     let ids = [];
-    while (id != 0) {
+    ids.push(id);
+    while (id > 0) {
         id = tree.get(id).parent;
         ids.push(id);
     }
@@ -22,27 +23,17 @@ function getAbsolutePath (tree, id) {
 }
 
 function getLowestCommonAncestor (tree, id1, id2) {
-    
-    ancestor1 = id1;
-    ancestor2 = id2;    
 
-    while ( (ancestor1 != 0) && (ancestor2 != 0) ) {
+    path1 = getAbsolutePath(tree, id1);
+    path2 = getAbsolutePath(tree, id2);
 
-        if (id1 != 0){
-            ancestor1 = tree.get(ancestor1).parent;
-        }
-            
-        if (id2 != 0){
-            ancestor2 = tree.get(ancestor1).parent;
-        }
-    
-        if (ancestor1 == ancestor2) {
-            break;
+    for (let index = 0; index < path1.length; index++) {
+        const element = path1[index];
+        if (path2.find(id => id == element)) {
+            return element;
         }
     }
-
-    return ancestor2;
-
+    return 0;
 
 }
 

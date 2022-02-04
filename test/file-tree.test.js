@@ -27,7 +27,7 @@ test('tests create loop-back tree', () => {
     expect(test).toThrow();
 })
 
-test('tests create tree', () => {
+test('tests getAbsolutePath', () => {
     root    = {"id": 0, "nom": "/", "parent": -1};
     file1   = {"id": 1, "nom": "file1", "parent": 0};
     file2   = {"id": 2, "nom": "file2", "parent": 1};
@@ -43,5 +43,33 @@ test('tests create tree', () => {
     tree.set(file4.id, file4);
     tree.set(file5.id, file5);
 
-    expect(getAbsolutePath(tree, file5.id)).toEqual([4, 2, 1, 0]);
+    expect(getAbsolutePath(tree, file5.id)).toEqual([5, 4, 2, 1, 0]);
+})
+
+test('tests getAbsolutePath root', () => {
+    root    = {"id": 0, "nom": "/", "parent": -1};
+
+    const tree = new Map();
+    tree.set(root.id, root);
+
+    expect(getAbsolutePath(tree, root.id)).toEqual([0]);
+})
+
+test('tests getLowestCommonAncestor', () => {
+    root    = {"id": 0, "nom": "/", "parent": -1};
+    file1   = {"id": 1, "nom": "file1", "parent": 0};
+    file2   = {"id": 2, "nom": "file2", "parent": 0};
+    file3   = {"id": 3, "nom": "file3", "parent": 2};
+    file4   = {"id": 4, "nom": "file3", "parent": 2};
+    file5   = {"id": 5, "nom": "file3", "parent": 3};
+
+    const tree = new Map();
+    tree.set(root.id, root);
+    tree.set(file1.id, file1);
+    tree.set(file2.id, file2);
+    tree.set(file3.id, file3);
+    tree.set(file4.id, file4);
+    tree.set(file5.id, file5);
+
+    expect(getLowestCommonAncestor(tree, file5.id, file4.id)).toBe(2);
 })
